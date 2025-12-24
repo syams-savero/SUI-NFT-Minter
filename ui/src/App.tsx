@@ -42,7 +42,7 @@ function App() {
     { enabled: !!account }
   );
 
-  // FITUR BARU: Handle Upload File ke Supabase Storage
+  // Handle Upload File ke Supabase Storage
   const handleFileUpload = async (event: any) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -52,7 +52,7 @@ function App() {
     const filePath = `${fileName}`;
 
     const { error: uploadError } = await supabase.storage
-      .from('nft-images') // Pastikan lu udah bikin bucket "nft-images" di Supabase
+      .from('nft-images')
       .upload(filePath, file);
 
     if (uploadError) {
@@ -79,7 +79,7 @@ function App() {
     });
     signAndExecuteTransaction({ transaction: tx }, { onSuccess: () => { 
       setIsMinting(false);
-      alert("✅ NFT Created");
+      alert("NFT Created");
       setName(""); setDescription(""); setImageUrl("");
       setTimeout(() => refetchInventory(), 3000); 
     }});
